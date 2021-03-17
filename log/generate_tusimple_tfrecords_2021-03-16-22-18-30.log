@@ -1,0 +1,5 @@
+2021-03-16T22:18:30.646363+0000 INFO Start generating training example tfrecords
+2021-03-16T22:18:47.849419+0000 INFO Generating training example tfrecords complete
+2021-03-16T22:18:47.849550+0000 INFO Start generating validation example tfrecords
+2021-03-16T22:18:48.910655+0000 INFO Generating validation example tfrecords complete
+2021-03-16T22:18:48.910791+0000 INFO Start generating testing example tfrecords
