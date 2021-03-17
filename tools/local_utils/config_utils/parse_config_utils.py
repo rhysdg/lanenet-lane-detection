@@ -222,7 +222,7 @@ class Config(dict):
         return json.dump(origin_dict, f_obj)
 
 
-lanenet_cfg = Config(config_path='/home/rhysdg/beamdata/lanenet/tools/config/tusimple_lanenet.yaml')
+lanenet_cfg = Config(config_path='/content/lanenet-lane-detection/tools/config/tusimple_lanenet.yaml')
 
 
 if __name__ == '__main__':
