@@ -80,7 +80,7 @@ def eval_lanenet(src_dir, weights_path, save_dir,  dataset):
         else:
             print('culane')
             image_list = glob.glob(f'{src_dir}/*.jpg', recursive=True)
-            print(image_list)
+            print(len(image_list))
         
         
         avg_time_cost = []
@@ -115,20 +115,19 @@ def eval_lanenet(src_dir, weights_path, save_dir,  dataset):
                 os.makedirs(output_image_dir, exist_ok=True)
                 output_image_path = ops.join(output_image_dir, input_image_name)
             else:
-                #print('ey')
-               # print(os.path.basename(image_path))
                 input_image_name =  os.path.basename(image_path)
-                print(f'image_path: {image_path}')
-                print(f'save_dir: {save_dir}')
-                output_image_dir = ops.join(save_dir, input_image_name)
-                print(f'output: {output_image_dir}')
-                os.makedirs(output_image_dir, exist_ok=True)
-                output_image_path = ops.join(output_image_dir, input_image_name)
-                
+                output_image_path = ops.join(save_dir, input_image_name)
+      
             if ops.exists(output_image_path):
                 continue
-
-            cv2.imwrite(output_image_path, postprocess_result['source_image'])
+                
+            try:
+                cv2.imwrite(output_image_path, postprocess_result['source_image'])
+            except  Exception as e :
+                print(e)
+                print(f'Problem path: {output_image_path}')
+                pass
+                
 
     return
 
