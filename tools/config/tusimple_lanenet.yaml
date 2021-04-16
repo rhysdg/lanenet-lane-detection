@@ -49,8 +49,8 @@ MODEL:
 TEST:
     TEST_MODEL: 'model/cityscapes/final'
 TRAIN:
-    MODEL_SAVE_DIR: 'model/tusimple/'
-    TBOARD_SAVE_DIR: 'tboard/tusimple/'
+    MODEL_SAVE_DIR: '/content/drive/My Drive/testing ground/model/tusimple/'
+    TBOARD_SAVE_DIR: '/content/drive/My Drive/testing ground/tboard/tusimple/'
     MODEL_PARAMS_CONFIG_FILE_NAME: "model_train_config.json"
     RESTORE_FROM_SNAPSHOT:
         ENABLE: False
