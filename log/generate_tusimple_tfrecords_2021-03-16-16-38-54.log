@@ -1,4 +1,0 @@
-2021-03-16T16:38:54.623436+0000 INFO Generating training example index file complete
-2021-03-16T16:38:54.624351+0000 INFO Start generating training example tfrecords
-2021-03-16T16:39:07.565258+0000 INFO Generating training example tfrecords complete
-2021-03-16T16:39:07.565470+0000 INFO Start generating validation example tfrecords

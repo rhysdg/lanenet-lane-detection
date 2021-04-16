@@ -37,11 +37,13 @@ def init_args():
     parser.add_argument('--image_dir', type=str, help='The source tusimple lane test data dir')
     parser.add_argument('--weights_path', type=str, help='The model weights path')
     parser.add_argument('--save_dir', type=str, help='The test output save root dir')
+    parser.add_argument('--dataset', type=str, help='Switch between CuLane or Tusimple', default = 'culane',   choices=['tusimple', 'culane'])
+
 
     return parser.parse_args()
 
 
-def eval_lanenet(src_dir, weights_path, save_dir):
+def eval_lanenet(src_dir, weights_path, save_dir,  dataset):
     """
 
     :param src_dir:
@@ -73,8 +75,14 @@ def eval_lanenet(src_dir, weights_path, save_dir):
     with sess.as_default():
 
         saver.restore(sess=sess, save_path=weights_path)
-
-        image_list = glob.glob('{:s}/**/*.jpg'.format(src_dir), recursive=True)
+        if dataset == 'tusimple':
+            image_list = glob.glob('{:s}/**/*.jpg'.format(src_dir), recursive=True)
+        else:
+            print('culane')
+            image_list = glob.glob(f'{src_dir}/*.jpg', recursive=True)
+            print(image_list)
+        
+        
         avg_time_cost = []
         for index, image_path in tqdm.tqdm(enumerate(image_list), total=len(image_list)):
 
@@ -99,12 +107,24 @@ def eval_lanenet(src_dir, weights_path, save_dir):
             if index % 100 == 0:
                 LOG.info('Mean inference time every single image: {:.5f}s'.format(np.mean(avg_time_cost)))
                 avg_time_cost.clear()
-
-            input_image_dir = ops.split(image_path.split('clips')[1])[0][1:]
-            input_image_name = ops.split(image_path)[1]
-            output_image_dir = ops.join(save_dir, input_image_dir)
-            os.makedirs(output_image_dir, exist_ok=True)
-            output_image_path = ops.join(output_image_dir, input_image_name)
+            if args.dataset == 'tusimple':
+                input_image_dir = ops.split(image_path.split('clips')[1])[0][1:]
+                input_image_name = ops.split(image_path)[1]
+                output_image_dir = ops.join(save_dir, input_image_dir)
+                print(output_image_dir)
+                os.makedirs(output_image_dir, exist_ok=True)
+                output_image_path = ops.join(output_image_dir, input_image_name)
+            else:
+                #print('ey')
+               # print(os.path.basename(image_path))
+                input_image_name =  os.path.basename(image_path)
+                print(f'image_path: {image_path}')
+                print(f'save_dir: {save_dir}')
+                output_image_dir = ops.join(save_dir, input_image_name)
+                print(f'output: {output_image_dir}')
+                os.makedirs(output_image_dir, exist_ok=True)
+                output_image_path = ops.join(output_image_dir, input_image_name)
+                
             if ops.exists(output_image_path):
                 continue
 
@@ -123,5 +143,6 @@ if __name__ == '__main__':
     eval_lanenet(
         src_dir=args.image_dir,
         weights_path=args.weights_path,
-        save_dir=args.save_dir
+        save_dir=args.save_dir, 
+        dataset=args.dataset
     )

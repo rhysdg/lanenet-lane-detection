@@ -24,12 +24,12 @@ AUG:
         CONTRAST_JITTER_RATIO: 0.5
         SATURATION_JITTER_RATIO: 0.5
 DATASET:
-    DATA_DIR: '/home/rhysdg/beamdata/CULane/LaneNet'
-    IMAGE_TYPE: 'rgb'  # choice rgb or rgba
+    DATA_DIR: '/content/lanenet-lane-detection/data/LaneNet/'
+    IMAGE_TYPE: 'rgb'
     NUM_CLASSES: 2
-    TEST_FILE_LIST: '/home/rhysdg/beamdata/CULane/LaneNet/val.txt'
-    TRAIN_FILE_LIST: '/home/rhysdg/beamdata/CULane/LaneNet/train.txt'
-    VAL_FILE_LIST: '/home/rhysdg/beamdata/CULane/LaneNet/train.txt'
+    TEST_FILE_LIST: '/content/lanenet-lane-detection/data/LaneNet/val.txt'
+    TRAIN_FILE_LIST: '/content/lanenet-lane-detection/data/LaneNet/train.txt'
+    VAL_FILE_LIST: '/content/lanenet-lane-detection/data/LaneNet/val.txt'
     IGNORE_INDEX: 255
     PADDING_VALUE: [127.5, 127.5, 127.5]
     MEAN_VALUE: [0.5, 0.5, 0.5]

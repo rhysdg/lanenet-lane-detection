@@ -61,6 +61,8 @@ def write_example_tfrecords(gt_images_paths, gt_binary_images_paths, gt_instance
         for _index, _gt_image_path in enumerate(gt_images_paths):
 
             # prepare gt image
+            print('aha')
+            print(_gt_image_path)
             _gt_image = cv2.imread(_gt_image_path, cv2.IMREAD_UNCHANGED)
             if _gt_image.shape != (RESIZE_IMAGE_WIDTH, RESIZE_IMAGE_HEIGHT, 3):
                 _gt_image = cv2.resize(
@@ -71,6 +73,7 @@ def write_example_tfrecords(gt_images_paths, gt_binary_images_paths, gt_instance
             _gt_image_raw = _gt_image.tostring()
 
             # prepare gt binary image
+            print(gt_binary_images_paths[_index])
             _gt_binary_image = cv2.imread(gt_binary_images_paths[_index], cv2.IMREAD_UNCHANGED)
             if _gt_binary_image.shape != (RESIZE_IMAGE_WIDTH, RESIZE_IMAGE_HEIGHT):
                 _gt_binary_image = cv2.resize(

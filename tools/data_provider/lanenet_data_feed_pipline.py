@@ -145,6 +145,12 @@ class LaneNetDataProducer(object):
         Check if source data complete
         :return:
         """
+        print('whaaaaaaaaaaaaaaaaaaaaaaat')
+        print(self._gt_binary_image_dir)
+        print(self._gt_instance_image_dir)
+        print(self._gt_image_dir)
+        print(ops.exists(self._gt_binary_image_dir))
+        
         return \
             ops.exists(self._gt_binary_image_dir) and \
             ops.exists(self._gt_instance_image_dir) and \
