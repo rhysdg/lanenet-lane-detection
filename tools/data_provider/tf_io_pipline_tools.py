@@ -9,7 +9,7 @@
 tensorflow io pip line tools
 """
 import os
-import tqdm
+from tqdm import tqdm
 import os.path as ops
 
 import cv2
