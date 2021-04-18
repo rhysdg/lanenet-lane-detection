@@ -53,7 +53,7 @@ TRAIN:
     TBOARD_SAVE_DIR: '/content/drive/My Drive/testing ground/tboard/tusimple/'
     MODEL_PARAMS_CONFIG_FILE_NAME: "model_train_config.json"
     RESTORE_FROM_SNAPSHOT:
-        ENABLE: False
+        ENABLE: True
         SNAPSHOT_PATH: ''
     SNAPSHOT_EPOCH: 8
     BATCH_SIZE: 12

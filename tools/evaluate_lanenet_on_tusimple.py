@@ -104,7 +104,8 @@ def eval_lanenet(src_dir, weights_path, save_dir,  dataset):
                 source_image=image_vis
             )
 
-            if index % 100 == 0:
+            #if index % 100 == 0:
+            if index % len(image_list) == 0:
                 LOG.info('Mean inference time every single image: {:.5f}s'.format(np.mean(avg_time_cost)))
                 avg_time_cost.clear()
             if args.dataset == 'tusimple':
