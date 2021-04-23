@@ -34,6 +34,7 @@ def init_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--image_path', type=str, help='The image path or the src image save dir')
     parser.add_argument('--weights_path', type=str, help='The model weights path')
+    parser.add_argument('--display_clustering', action='store_true')
 
     return parser.parse_args()
 
@@ -67,7 +68,7 @@ def minmax_scale(input_arr):
     return output_arr
 
 
-def test_lanenet(image_path, weights_path):
+def test_lanenet(image_path, weights_path, display_clustering=False):
     """
 
     :param image_path:
@@ -132,11 +133,13 @@ def test_lanenet(image_path, weights_path):
         for i in range(CFG.MODEL.EMBEDDING_FEATS_DIMS):
             instance_seg_image[0][:, :, i] = minmax_scale(instance_seg_image[0][:, :, i])
         embedding_image = np.array(instance_seg_image[0], np.uint8)
-
-        plt.figure('mask_image')
-        plt.imshow(mask_image[:, :, (2, 1, 0)])
-        plt.figure('src_image')
-        plt.imshow(image_vis[:, :, (2, 1, 0)])
+        
+        if display_clustering:
+            plt.figure('mask_image')
+            plt.imshow(mask_image[:, :, (2, 1, 0)])
+            plt.figure('src_image')
+            plt.imshow(image_vis[:, :, (2, 1, 0)])
+            
         plt.figure('instance_image')
         plt.imshow(embedding_image[:, :, (2, 1, 0)])
         plt.figure('binary_image')
@@ -155,4 +158,4 @@ if __name__ == '__main__':
     # init args
     args = init_args()
 
-    test_lanenet(args.image_path, args.weights_path)
+    test_lanenet(args.image_path, args.weights_path,  display_clustering=args.display_clustering)
