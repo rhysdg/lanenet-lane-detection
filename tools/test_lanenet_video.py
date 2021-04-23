@@ -87,10 +87,9 @@ def test_lanenet(image_path, weights_path, bench=False, display=False):
     output_size = (width, height)
     #fps = cap.get(cv2.CAP_PROP_FPS)
     fps = 30
+    
+    images = sorted(glob.glob(f'{image_path}/*.jpg'))
     out = cv2.VideoWriter(save_name,cv2.VideoWriter_fourcc('M','J','P','G'), fps , output_size )
-
-
-
 
     input_tensor = tf.placeholder(dtype=tf.float32, shape=[1, 256, 512, 3], name='input_tensor')
 
@@ -116,15 +115,13 @@ def test_lanenet(image_path, weights_path, bench=False, display=False):
     # define saver
     saver = tf.train.Saver(variables_to_restore)
     
-
-
     with sess.as_default():
         saver.restore(sess=sess, save_path=weights_path)
         LOG.info('Start reading image and preprocessing')
-        
+
         if args.bench:
             t_start = time.time()
-            image = cv2.imread(image_path, cv2.IMREAD_COLOR)
+            image = cv2.imread(images[0], cv2.IMREAD_COLOR)
             image_vis = image
             img = cv2.resize(image, (512, 256), interpolation=cv2.INTER_LINEAR)
             image = img / 127.5 - 1.0
@@ -141,7 +138,7 @@ def test_lanenet(image_path, weights_path, bench=False, display=False):
             t_cost /= loop_times
             LOG.info('Single imgae inference cost time: {:.5f}s'.format(t_cost))
 
-        for image in tqdm(sorted(glob.glob('/home/rhysdg/data/culane_video/05081544_0305/05081544_0305*.jpg'))):
+        for image in tqdm(images):
             image = cv2.imread(image, cv2.IMREAD_COLOR)
             image_vis = image
             img = cv2.resize(image, (512, 256), interpolation=cv2.INTER_LINEAR)
