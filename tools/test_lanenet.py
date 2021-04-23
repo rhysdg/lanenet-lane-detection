@@ -139,7 +139,10 @@ def test_lanenet(image_path, weights_path, display_clustering=False):
             plt.imshow(mask_image[:, :, (2, 1, 0)])
             plt.figure('src_image')
             plt.imshow(image_vis[:, :, (2, 1, 0)])
-            
+        
+        
+        plt.figure('instance_image')
+        plt.imshow(image[:, :, (2, 1, 0)])
         plt.figure('instance_image')
         plt.imshow(embedding_image[:, :, (2, 1, 0)])
         plt.figure('binary_image')
