@@ -27,6 +27,13 @@ from local_utils.log_util import init_logger
 CFG = parse_config_utils.lanenet_cfg
 LOG = init_logger.get_logger(log_file_name_prefix='lanenet_test')
 
+#video setup
+save_name = "output.mp4"
+width = 1024
+height = 256
+output_size = (width, height)
+fps = 30
+
 
 def init_args():
     """
@@ -79,15 +86,6 @@ def test_lanenet(image_path, weights_path, bench=False, display=False):
     :param weights_path:
     :return:
     """
-    
-    #video setup
-    save_name = "output.mp4"
-    width = 1024
-    height = 256
-    output_size = (width, height)
-    #fps = cap.get(cv2.CAP_PROP_FPS)
-    fps = 30
-    
     images = sorted(glob.glob(f'{image_path}/*.jpg'))
     out = cv2.VideoWriter(save_name,cv2.VideoWriter_fourcc('M','J','P','G'), fps , output_size )
 
